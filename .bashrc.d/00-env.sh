@@ -67,6 +67,7 @@ path_append() {
 	esac
 }
 
+path_prepend "$HOME/bin"
 path_prepend "$HOME/.cargo/bin"
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.atuin/bin"
