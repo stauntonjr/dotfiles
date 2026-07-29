@@ -1,0 +1,40 @@
+// Alloy config (populated for this host)
+// Generated: 2025-10-26
+
+logging {
+  level = "info",
+}
+
+loki.write "local" {
+  endpoint = {
+    url = "https://log.ediacarian.home/loki/api/v1/push",
+    tls = {
+      ca_file = "/root/dotfiles/ssl/ca.crt",
+    },
+  },
+}
+
+prometheus.remote_write "remote" {
+  endpoint = {
+    url = "http://127.0.0.1:8428/api/v1/push",
+  },
+}
+
+// Collect node metrics via exporters (tweak/exporters per host)
+prometheus.exporter.unix "node" {
+  include_exporter_metrics = true,
+  disable_collectors = ["mdadm"],
+}
+
+// Read the system journal and forward to loki
+loki.source.journal "read" {
+  forward_to = [
+    loki.write.local.receiver,
+  ],
+  labels = {
+    job = "proxmox-host-journal",
+    host = "${HOSTNAME}",
+  },
+}
+
+// Additional pipeline/processors can be added below

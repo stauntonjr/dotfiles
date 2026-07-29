@@ -1,0 +1,32 @@
+# Decrypted artifacts (never commit)
+secrets/**/*.dec
+secrets/**/*.decrypted
+secrets/**/*.plain
+secrets/**/*.tmp
+# Common env outputs (if you choose to export decrypted files)
+secrets/**/*.env.local
+secrets/**/*.env.plain
+
+# Repo-local plaintext secrets restored from secrets/manifest.tsv
+/.env
+/mcp-srv/ca.crt
+/scripts/ssh/test/test-id_ed25519
+/scripts/ssh/test/test-id_ed25519-cert.pub
+/scripts/ssh/test/test-ssh_ca
+/ssh/id_ed25519
+/ssh/id_ed25519-cert.pub
+/ssh/old/dns-srv.crt
+/ssh/old/dns-srv.key
+/ssh/old/jrs-id_ed25519
+/ssh/old/jrs-id_ed25519-cert.pub
+/ssh/old/jrs-ssh-user-ca
+/ssh/old/jrs-ssh-user-cert.pub
+/ssh/old/mcp-srv-ca.crt
+/ssh/old/mcp-srv-ca.key
+/ssh/old/mcp-srv-local.crt
+/ssh/old/mcp-srv-local.key
+/ssh/ssh_ca
+/ssl/ca.crt
+/ssl/ca.key
+/ssl/wildcard.ediacarian.home.crt
+/ssl/wildcard.ediacarian.home.key

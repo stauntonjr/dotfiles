@@ -1,0 +1,5 @@
+sync_address = "http://sh.ediacarian.home:8888"
+
+[daemon]
+enabled = true
+autostart = true

@@ -1,0 +1,6 @@
+
+# Minimal ble.sh config (silent, safe)
+# Add custom keybindings here ONLY if you have verified support in your ble.sh version.
+# For most users, default settings are best. Uncomment and test new bindings as needed.
+
+# Multiline mode disabled to avoid Ctrl+J conflict in VSCode terminal
