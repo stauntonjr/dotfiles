@@ -88,7 +88,11 @@ if [ "$is_interactive" = true ]; then
 	fi
 
 	if declare -F ble-attach >/dev/null 2>&1; then
-		ble-attach
+		if [ -n "${VSCODE_INJECTION:-}" ]; then
+			VSCODE_INJECTION= ble-attach
+		else
+			ble-attach
+		fi
 	fi
 
 	# Bind Ctrl+f to insert 'zi' followed by a newline
