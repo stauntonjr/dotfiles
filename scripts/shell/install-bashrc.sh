@@ -47,6 +47,9 @@ is_interactive=false
 case \$- in
 	*i*) is_interactive=true ;;
 esac
+if [ "\${TERM_PROGRAM:-}" = "vscode" ] || [ -n "\${VSCODE_INJECTION:-}" ] || [ -n "\${VSCODE_SHELL_INTEGRATION:-}" ]; then
+	is_interactive=true
+fi
 
 # shellcheck disable=SC1090
 . "\$DOTFILES_DIR/.bashrc.d/00-env.sh"
@@ -93,6 +96,7 @@ mkdir -p "$HOME/.config" "$HOME/.config/fastfetch"
 
 install_managed_bashrc
 link_config "$dotfiles_dir/.profile" "$HOME/.profile"
+link_config "$dotfiles_dir/.bash_profile" "$HOME/.bash_profile"
 link_config "$dotfiles_dir/starship.toml" "$HOME/.config/starship.toml"
 link_config "$dotfiles_dir/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 link_config "$dotfiles_dir/.blerc" "$HOME/.blerc"
