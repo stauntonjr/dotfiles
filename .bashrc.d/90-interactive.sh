@@ -59,6 +59,9 @@ if [ "$is_interactive" = true ]; then
 		fi
 	done
 	unset conda_profile
+	if command -v conda >/dev/null 2>&1 && [ "${CONDA_SHLVL:-0}" -eq 0 ]; then
+		conda activate base >/dev/null 2>&1 || true
+	fi
 
 	if [ -t 1 ] && [ "${TERM:-dumb}" != dumb ]; then
 		if command -v starship >/dev/null 2>&1 && [ -f "$dotfiles_dir/starship.toml" ]; then
