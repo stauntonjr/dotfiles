@@ -47,26 +47,18 @@ if [ "$is_interactive" = true ]; then
 		PROMPT_COMMAND='history -a'
 	fi
 
-	__conda_setup=
-	if command -v conda >/dev/null 2>&1; then
-		__conda_setup="$(conda shell.bash hook 2>/dev/null)" || true
-	fi
-	if [ -n "$__conda_setup" ]; then
-		eval "$__conda_setup"
-	else
-		for conda_profile in \
-			"$HOME/anaconda3/etc/profile.d/conda.sh" \
-			"$HOME/miniconda3/etc/profile.d/conda.sh"
-		do
-			if [ -f "$conda_profile" ]; then
-				# shellcheck disable=SC1090
-				. "$conda_profile"
-				break
-			fi
-		done
-		unset conda_profile
-	fi
-	unset __conda_setup
+	export CONDA_CHANGEPS1=false
+	for conda_profile in \
+		"$HOME/anaconda3/etc/profile.d/conda.sh" \
+		"$HOME/miniconda3/etc/profile.d/conda.sh"
+	do
+		if [ -f "$conda_profile" ]; then
+			# shellcheck disable=SC1090
+			. "$conda_profile"
+			break
+		fi
+	done
+	unset conda_profile
 
 	if [ -t 1 ] && [ "${TERM:-dumb}" != dumb ]; then
 		if command -v starship >/dev/null 2>&1 && [ -f "$dotfiles_dir/starship.toml" ]; then
