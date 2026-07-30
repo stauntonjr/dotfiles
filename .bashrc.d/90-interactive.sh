@@ -10,6 +10,21 @@ if [ "$is_interactive" = true ]; then
 		. "$HOME/.local/share/blesh/ble.sh" --noattach
 	fi
 
+	for bash_completion in \
+		/opt/homebrew/etc/profile.d/bash_completion.sh \
+		/usr/local/etc/profile.d/bash_completion.sh \
+		/usr/share/bash-completion/bash_completion \
+		/etc/bash_completion \
+		/usr/local/etc/bash_completion
+	do
+		if [ -f "$bash_completion" ]; then
+			# shellcheck disable=SC1090
+			. "$bash_completion"
+			break
+		fi
+	done
+	unset bash_completion
+
 	if command -v atuin >/dev/null 2>&1; then
 		# Initialize pty-proxy before the regular Atuin shell hooks so the daemon
 		# can capture command output for MCP/AI tooling.
