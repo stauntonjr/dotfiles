@@ -126,24 +126,26 @@ Or paste your cookie directly:
 export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
 ```
 
-### Download All Posts (v4 - full archive with API)
+### Download All Posts (v5 - full archive with API)
 
 ```bash
 export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
-python download_kaitchup_v4.py
+cd /home/jrs/substack-downloader
+python download_kaitchup_v5.py
 ```
 
 This uses Substack's undocumented JSON API with pagination:
 - `GET /api/v1/archive?offset=N&limit=50` - fetch archive batches
 - `GET /api/v1/posts/by-id/{post_id}` - fetch full post content
 - Automatically paginates through all posts (~459 posts in The Kaitchup)
+- Saves posts with section prefixes (archive_2026-08-02_filename.md)
 
-### Why v4 is Better Than v3
-- **v3**: Free posts only → 29 posts
-- **v4**: Full archive with auth → **459 posts** (16x more content)
-- Uses API pagination instead of HTML scraping
-- Downloads full post content in Markdown format
-- Automatically skips already-downloaded posts
+### Why v5 is Better Than v4
+- **v4**: Full archive with API → 459 posts
+- **v5**: Enhanced v4 with better file organization → same 459 posts
+- Improved progress tracking and error handling
+- Better filename naming with section prefixes
+- More robust deduplication
 
 ### API-Based Download Strategy
 
@@ -166,7 +168,7 @@ This is the recommended method for downloading the complete archive:
 ```bash
 cd /home/jrs/substack-downloader
 export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
-python download_kaitchup_v4.py
+python download_kaitchup_v5.py
 ```
 
 This downloads **459 posts** using Substack's API with pagination.
