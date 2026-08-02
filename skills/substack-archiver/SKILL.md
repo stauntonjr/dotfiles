@@ -76,6 +76,38 @@ This downloads all posts from multiple sources:
 - **v3**: Aggregates from RSS, archive, tutorials, and notebooks → 29 posts
 - Automatically deduplicates across all sources
 
+### Download Strategy for Public Posts Only
+
+| Source | Posts | Notes |
+|--------|-------|-------|
+| RSS Feed | 20 | Always returns latest 20 posts, no pagination |
+| Archive Page (static) | ~12 | Only first page visible, infinite scroll requires automation |
+| Tutorials Section | ~12 | Same limitation as archive page |
+| Notebooks Section | 0 | May be empty or same as archive |
+
+**Total publicly accessible**: ~20-32 posts without subscription
+
+#### Why Full Archive Is Limited
+
+1. **No API Pagination**: `/api/v1/archive` returns ~100 posts but no offset parameter for fetching more
+2. **RSS Limitation**: Standard RSS behavior - Substack only exposes latest 20 posts
+3. **Infinite Scroll**: Archive page loads dynamically via JavaScript; static HTML parsing only sees initial view
+4. **Paid Content**: Hidden posts (`hidden: true`, `audience: only_paid`) require authentication
+
+#### Optimal Strategy
+
+```python
+# Best approach without subscription:
+1. RSS feed → 20 posts (all publicly available)
+2. Archive page → ~12 additional posts (visible in static HTML)
+3. Deduplicate → ~22-29 unique posts
+```
+
+For full archive access (hundreds of posts), you need:
+- Substack paid subscription
+- Browser automation with session cookies (requires GUI login on Mac, then transfer `substack_session.json` to DGX Spark)
+- Or wait for Substack to add pagination to their public API
+
 ## Usage
 
 ### The Kaitchup - All Posts (Direct Method)
