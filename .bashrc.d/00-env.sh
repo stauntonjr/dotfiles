@@ -71,6 +71,7 @@ path_prepend "$HOME/bin"
 path_prepend "$HOME/.cargo/bin"
 path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.atuin/bin"
+path_prepend "$HOME/.local/share/pi-node/node-v22.23.2-linux-arm64/bin"
 if [ -d "$HOME/anaconda3/condabin" ]; then
 	path_prepend "$HOME/anaconda3/condabin"
 fi
