@@ -55,10 +55,10 @@ If you don't need paid content, use the direct archive download script.
 
 ```bash
 cd /home/jrs/substack-downloader
-pip install feedparser bs4 requests
+pip install feedparser bs4 requests html2text
 ```
 
-### Download All Posts
+### Download All Posts (v3 - free posts only)
 
 ```bash
 python download_kaitchup_v3.py
@@ -103,18 +103,84 @@ This downloads all posts from multiple sources:
 3. Deduplicate → ~22-29 unique posts
 ```
 
+## Method 3: API-Based Archive Download (with subscription)
+
+**Use this method to download the full archive (hundreds of posts).**
+
+### Installation
+
+```bash
+cd /home/jrs/substack-downloader
+pip install requests html2text
+```
+
+### Authentication (with your Substack session cookie)
+
+You need your Substack session cookie (`substack.sid`). Copy it from:
+1. Open Substack in Firefox on Mac
+2. Developer Tools → Application → Cookies → `substack.sid`
+3. Set as environment variable: `export SUBSTACK_SID="YOUR_COOKIE_VALUE"`
+
+Or paste your cookie directly:
+```bash
+export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
+```
+
+### Download All Posts (v4 - full archive with API)
+
+```bash
+export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
+python download_kaitchup_v4.py
+```
+
+This uses Substack's undocumented JSON API with pagination:
+- `GET /api/v1/archive?offset=N&limit=50` - fetch archive batches
+- `GET /api/v1/posts/by-id/{post_id}` - fetch full post content
+- Automatically paginates through all posts (~459 posts in The Kaitchup)
+
+### Why v4 is Better Than v3
+- **v3**: Free posts only → 29 posts
+- **v4**: Full archive with auth → **459 posts** (16x more content)
+- Uses API pagination instead of HTML scraping
+- Downloads full post content in Markdown format
+- Automatically skips already-downloaded posts
+
+### API-Based Download Strategy
+
+| Method | Posts | Auth Required | Notes |
+|--------|-------|---------------|-------|
+| RSS + Archive (v3) | 29 | No | Free posts only |
+| API with Cookie (v4) | 459 | Yes | Full archive with paid content |
+
 For full archive access (hundreds of posts), you need:
-- Substack paid subscription
-- Browser automation with session cookies (requires GUI login on Mac, then transfer `substack_session.json` to DGX Spark)
+- Substack paid subscription (to get session cookie)
+- Browser automation with session cookies transferred from Mac to DGX Spark
 - Or wait for Substack to add pagination to their public API
 
 ## Usage
 
-### The Kaitchup - All Posts (Direct Method)
+### The Kaitchup - Full Archive (API Method - RECOMMENDED)
+
+This is the recommended method for downloading the complete archive:
+
+```bash
+cd /home/jrs/substack-downloader
+export SUBSTACK_SID="s%3AcMmFhrK-fExuCj1SLumQ-RVZD_8mi2lq.gHPf%2FvrOuO6Rp65fFdH1cw2iOnvqs5%2FqSHUHjNC%2FNc8"
+python download_kaitchup_v4.py
+```
+
+This downloads **459 posts** using Substack's API with pagination.
+
+### The Kaitchup - Free Posts Only (v3 Method)
+
+If you don't have a Substack subscription, use the v3 script:
+
 ```bash
 cd /home/jrs/substack-downloader
 python download_kaitchup_v3.py
 ```
+
+This downloads ~29 free posts from RSS + archive page.
 
 ### substack-downloader (with authentication)
 ```bash
@@ -185,25 +251,23 @@ ls -1 *.md | wc -l
 
 ## The Kaitchup Archive Status
 
-✅ **29 posts downloaded successfully (v3 - comprehensive method):**
+✅ **459 posts downloaded successfully (v4 - full archive with API):**
 
-### New Posts in v3 (not in v2):
-1. `4-bit-GLM4.7-with-a-single-B300-high` - 4-bit quantization on B300
-2. `dflash-vs-mtp-qwen36-speculative` - DFlash vs MTP speculative decoding
-3. `eagle-3-speculators-when-to-use-them` - Eagle-3 speculator models
-4. `glm-5-memory-requirements-explained` - GLM-5 memory requirements
-5. `how-to-deploy-your-llm-in-the-cloud` - Cloud deployment guide
-6. `how-to-reduce-llm-inference-cost` - Cost optimization techniques
-7. `make-your-own-optimized-ggufs-with` - GGUF optimization tutorial
-8. `moq-ggufs-and-gsq-low-bit-ggufs-are` - MOQ and GSQ quantization
-9. `new-diffusiongemma-and-moq-ggufs` - DiffusionGemma and MOQ
-10. `qwen35-9b-moq-inside-a-strong-36` - Qwen3.5 9B MOQ analysis
-11. `qwen35-quantization-similar-accuracy` - Qwen3.5 quantization
-12. `qwopus-and-reap-custom-qwen36-models` - QwOpus and REAP custom models
-13. `reasoning-budgets-vs-structured-cot` - Reasoning budget comparison
-14. `serving-exllamav3-with-tabbyapi-accuracy` - ExLlama v3 deployment
-15. `the-kv-cache-of-small-moes-qwen3` - KV cache for small MoEs
-16. `train-and-run-dflash-speculative` - DFlash training and inference
+### v4 (new - API-based with pagination):
+- Downloads **459 posts total** using Substack's undocumented JSON API
+- Automatically paginates through all archive batches
+- Downloads full post content in Markdown format
+- Uses session cookie for authenticated access to paid content
+- Skips already-downloaded posts automatically
+
+### v3 (free posts only):
+- Downloads **29 posts** from RSS + archive page
+- No authentication required
+- Limited to publicly available content
+
+### v2 (archive only - legacy):
+- Downloads **12 posts** from static HTML
+- Superseded by v3 which aggregates from multiple sources
 
 ### From v2 (already downloaded):
 1. `agentic-ai-at-two-different-scales` - Agentic AI at two scales
@@ -264,13 +328,35 @@ For full archive access (hundreds of posts), you need:
 - The newsletter may have bot protection enabled
 - Try with custom domain: `python login.py https://kaitchup.substack.com`
 
-### Missing posts
+### Missing posts (v3 - RSS/Archive)
 - Try `--limit 100` to force more posts
 - Check if some posts are behind a paywall (requires valid session)
 
-### Deduplication not working
+### Missing posts (v4 - API)
+- API returns 459 posts total for The Kaitchup
+- Some posts may fail if they're behind a paywall without valid auth
+- The script automatically skips already-downloaded posts
+- If many posts fail, check your SUBSTACK_SID cookie is valid
+
+### 429 Too Many Requests error
+- Reduce the `limit` parameter in the script
+- Add longer delays between requests
+- The script uses 1 second delay by default
+
+### 404 Not Found error
+- The post may have been deleted or moved
+- Check the post ID in the archive
+- The script will skip these and continue
+
+### Deduplication not working (v3)
 - Use v3 which aggregates from multiple sources and deduplicates
 - Check for existing files before downloading (v3 handles this automatically)
+
+### Deduplication not working (v4)
+- v4 uses post IDs from API to check if already downloaded
+- Post ID is saved in each markdown file header
+- The script skips posts that were already downloaded
+- If many posts fail, check your SUBSTACK_SID cookie is valid
 
 ## Security Notes
 
