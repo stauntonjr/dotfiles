@@ -147,6 +147,22 @@ This uses Substack's undocumented JSON API with pagination:
 - Better filename naming with section prefixes
 - More robust deduplication
 
+### About The Kaitchup's "190+ Notebooks"
+
+The Kaitchup mentions "190+ notebooks" on its [AI Notebooks page](https://kaitchup.substack.com/p/notebooks), but these are:
+- **Not stored as individual Substack posts**
+- **Managed as a separate database/resource**
+- **Only accessible via paid subscription**
+- **Not available through the standard API archive**
+
+The notebooks page is a landing page with links to external Colab notebooks that require authentication to access. The API does not expose a direct list of these notebooks.
+
+**Workaround**: If you have a paid subscription, use `substack-downloader` to download the notebooks page content, then extract the Colab links from the markdown:
+```bash
+python scraper.py --url https://kaitchup.substack.com/p/notebooks --md-only
+grep -o "https://colab.research.google.com/drive/[^"]*" *.md
+```
+
 ### API-Based Download Strategy
 
 | Method | Posts | Auth Required | Notes |
