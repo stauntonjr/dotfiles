@@ -1,7 +1,9 @@
 SSH config managed via dotfiles
 
 Unified config
-- ssh/config: single client config used by both Linux/WSL and Windows
+- `ssh/config`: SOPS-managed client config used by Linux/WSL and Windows.
+  It is decrypted locally by `scripts/setup-secrets.sh` and intentionally
+  ignored by Git.
 
 Deprecated (kept for reference)
 - config_linux, config_win (no longer needed)

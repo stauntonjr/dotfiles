@@ -10,6 +10,7 @@ secrets/**/*.env.plain
 # Repo-local plaintext secrets restored from secrets/manifest.tsv
 /.env
 /mcp-srv/ca.crt
+/ssh/config
 /scripts/ssh/test/test-id_ed25519
 /scripts/ssh/test/test-id_ed25519-cert.pub
 /scripts/ssh/test/test-ssh_ca
