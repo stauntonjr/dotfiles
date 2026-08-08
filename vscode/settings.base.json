@@ -1,0 +1,22 @@
+{
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "chatgpt.followUpQueueMode": "steer",
+  "chat.sessionSync.enabled": true,
+  "chat.mcp.gallery.enabled": true,
+  "specstory.cloudSync.enabled": "always",
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.panel.chat.view.copilot.focus",
+    "workbench.action.focusActiveEditorGroup",
+    "workbench.action.terminal.toggleTerminal"
+  ],
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.tabs.enabled": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.enablePreviewFromCodeNavigation": false
+}

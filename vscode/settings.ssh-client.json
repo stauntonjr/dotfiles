@@ -1,0 +1,25 @@
+{
+  "remote.SSH.useExecServer": false,
+  "remote.SSH.useLocalServer": false,
+  "remote.SSH.localServerDownload": "always",
+  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.loglevel": "trace",
+  "remote.SSH.remotePlatform": {
+    "dgx": "linux",
+    "proxmox": "linux",
+    "docker-lxc": "linux",
+    "smb-srv": "linux",
+    "img-srv": "linux",
+    "mcp-srv": "linux",
+    "vpn-srv": "linux",
+    "oidc-srv": "linux",
+    "dns-srv": "linux",
+    "sh-srv": "linux",
+    "md-srv": "linux",
+    "log-srv": "linux",
+    "ediacarian": "linux",
+    "win-desktop": "windows",
+    "wsl-desktop": "linux",
+    "wsl-desktop-local": "linux"
+  }
+}

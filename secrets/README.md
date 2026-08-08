@@ -30,6 +30,20 @@ To edit one secret with automatic re-encryption:
 bash scripts/secrets/edit.sh .env
 ```
 
+## mcp-srv runtime configuration
+
+The live mcp-srv environment, connector configuration, and Traefik dynamic
+configuration are encrypted under `secrets/store/mcp-srv/`. They are
+materialized beneath `mcp-srv/runtime/` and deployed to the service directory
+without being committed to the public `mcp-srv` repository:
+
+```bash
+bash scripts/mcp-srv/deploy.sh
+```
+
+Use `--restart` only after reviewing a configuration change. The deployment
+command validates the Compose project before restarting it.
+
 To verify the full repo decrypts cleanly without leaving plaintext behind:
 
 ```bash
