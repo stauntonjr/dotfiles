@@ -1,0 +1,106 @@
+# Unified SSH client config for Windows and Linux/WSL
+# Use ~ paths so this works on both platforms
+
+Host *
+  IdentityFile ~/dotfiles/ssh/id_ed25519
+  CertificateFile ~/dotfiles/ssh/id_ed25519-cert.pub
+  IdentitiesOnly yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+
+Host github.com
+  User git
+  IdentityFile ~/dotfiles/ssh/id_ed25519
+  IdentitiesOnly yes
+
+Host msi
+  HostName 10.0.0.220
+  User jrs
+
+Host proxmox
+  HostName 10.0.0.250
+  User root
+
+Host docker-lxc
+  HostName 10.0.0.95
+  User root
+  ProxyJump proxmox
+  Port 22
+
+Host smb-srv
+  HostName 10.0.0.37
+  User root
+
+Host img-srv
+  HostName 10.0.0.247
+  User root
+
+Host mcp-srv
+  HostName 10.0.0.193
+  User root
+
+Host vpn-srv
+  HostName 10.0.0.7
+  User root
+
+Host oidc-srv
+  HostName 10.0.0.226
+  User root
+
+Host dns-srv
+  HostName 10.0.0.152
+  User root
+
+Host sh-srv
+  HostName 10.0.0.119
+  User root
+
+Host md-srv
+  HostName 10.0.0.61
+  User root
+
+Host log-srv
+  HostName 10.0.0.28
+  User root
+
+Host ediacarian
+  HostName 193.122.204.110
+  User ubuntu
+
+Host ediacarian-tailnet
+  HostName 100.96.194.66
+  User ubuntu
+
+Host win-desktop
+  HostName 10.0.0.204
+  User User
+
+# WSL via Windows portproxy (use on Linux hosts)
+Host wsl-desktop
+  HostName 10.0.0.204
+  Port 2222
+  User jrs
+
+# WSL local on Windows host
+Host wsl-desktop-local
+  HostName localhost
+  Port 22
+  User jrs
+
+# DGX host (trusts local certificate)
+Host dgx
+  HostName 10.0.0.209
+  User jrs
+  IdentityFile ~/dotfiles/ssh/id_ed25519
+  CertificateFile ~/dotfiles/ssh/id_ed25519-cert.pub
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  ForwardAgent yes
+
+# DGX host over Tailscale
+Host dgx-tailnet
+  HostName spark-3a8f.tail64bbe0.ts.net
+  User jrs
+  Port 22
+  HostKeyAlias 10.0.0.209
