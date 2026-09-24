@@ -50,6 +50,9 @@ To verify the full repo decrypts cleanly without leaving plaintext behind:
 bash scripts/secrets/check.sh
 ```
 
+OCI config and private API key material are managed as encrypted entries under
+`secrets/store/oci/`. The public key is safe to keep at `oci/oci_api_key_public.pem`.
+
 `secrets/manifest.tsv` uses tab-separated columns:
 
 1. repo-relative plaintext path

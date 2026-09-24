@@ -1,4 +1,6 @@
 # Decrypted artifacts (never commit)
+/oci/config
+/oci/oci_api_key.pem
 secrets/**/*.dec
 secrets/**/*.decrypted
 secrets/**/*.plain
