@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ediacarian.oci-a1-retry</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/jrs/dotfiles/scripts/oci/try-a1-free-tier.sh</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>21600</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/jrs/.local/state/oci-a1-retry/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/jrs/.local/state/oci-a1-retry/launchd.err.log</string>
+</dict>
+</plist>
