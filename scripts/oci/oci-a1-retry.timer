@@ -1,0 +1,10 @@
+[Unit]
+Description=Retry OCI A1 provisioning every 4 hours 27 minutes
+
+[Timer]
+OnBootSec=4h27m
+OnUnitActiveSec=4h27m
+Persistent=true
+
+[Install]
+WantedBy=timers.target

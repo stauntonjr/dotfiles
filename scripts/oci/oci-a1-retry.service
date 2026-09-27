@@ -1,0 +1,7 @@
+[Unit]
+Description=Retry OCI Always Free Ampere A1 provisioning
+
+[Service]
+Type=oneshot
+Environment=PATH=/home/jrs/.venvs/oci-cli/bin:/home/jrs/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/jrs/dotfiles/scripts/oci/try-a1-free-tier.sh
