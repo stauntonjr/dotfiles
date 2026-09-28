@@ -22,6 +22,10 @@ Host proxmox
   HostName 10.0.0.250
   User root
 
+Host proxmox-tailnet
+  HostName proxmox.tail64bbe0.ts.net
+  User root
+
 Host docker-lxc
   HostName 10.0.0.95
   User root
@@ -32,36 +36,72 @@ Host smb-srv
   HostName 10.0.0.37
   User root
 
+Host smb-srv-tailnet
+  HostName smb-srv.tail64bbe0.ts.net
+  User root
+
 Host img-srv
   HostName 10.0.0.247
+  User root
+
+Host img-srv-tailnet
+  HostName img-srv.tail64bbe0.ts.net
   User root
 
 Host mcp-srv
   HostName 10.0.0.193
   User root
 
+Host mcp-srv-tailnet
+  HostName mcp-srv.tail64bbe0.ts.net
+  User root
+
 Host vpn-srv
   HostName 10.0.0.7
+  User root
+
+Host vpn-srv-tailnet
+  HostName vpn-srv.tail64bbe0.ts.net
   User root
 
 Host oidc-srv
   HostName 10.0.0.226
   User root
 
+Host oidc-srv-tailnet
+  HostName oidc-srv.tail64bbe0.ts.net
+  User root
+
 Host dns-srv
   HostName 10.0.0.152
+  User root
+
+Host dns-srv-tailnet
+  HostName dns-srv.tail64bbe0.ts.net
   User root
 
 Host sh-srv
   HostName 10.0.0.119
   User root
 
+Host sh-srv-tailnet
+  HostName sh-srv.tail64bbe0.ts.net
+  User root
+
 Host md-srv
   HostName 10.0.0.61
   User root
 
+Host md-srv-tailnet
+  HostName md-srv.tail64bbe0.ts.net
+  User root
+
 Host log-srv
   HostName 10.0.0.28
+  User root
+
+Host log-srv-tailnet
+  HostName log-srv.tail64bbe0.ts.net
   User root
 
 Host ediacarian
@@ -69,11 +109,15 @@ Host ediacarian
   User ubuntu
 
 Host ediacarian-tailnet
-  HostName 100.96.194.66
+  HostName ediacarian.tail64bbe0.ts.net
   User ubuntu
 
 Host win-desktop
   HostName 10.0.0.204
+  User User
+
+Host win-desktop-tailnet
+  HostName jrsdesktop.tail64bbe0.ts.net
   User User
 
 # WSL via Windows portproxy (use on Linux hosts)
@@ -104,3 +148,7 @@ Host dgx-tailnet
   User jrs
   Port 22
   HostKeyAlias 10.0.0.209
+
+Host macbook-tailnet
+  HostName jacks-macbook-air.tail64bbe0.ts.net
+  User jrs
