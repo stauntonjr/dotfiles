@@ -4,8 +4,8 @@ set -euo pipefail
 # Expand ~ and resolve absolute/relative paths
 expand_path() {
   case "$1" in
-    ~) printf "%s\n" "$HOME" ;;
-    ~/*) printf "%s\n" "$HOME/${1#~/}" ;;
+    \~) printf "%s\n" "$HOME" ;;
+    \~/*) printf "%s\n" "$HOME/${1#\~/}" ;;
     /*) printf "%s\n" "$1" ;;
     *) printf "%s\n" "$PWD/$1" ;;
   esac
