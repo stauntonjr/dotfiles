@@ -2,7 +2,7 @@
   "remote.SSH.useExecServer": false,
   "remote.SSH.useLocalServer": false,
   "remote.SSH.localServerDownload": "always",
-  "remote.SSH.showLoginTerminal": true,
+  "remote.SSH.showLoginTerminal": false,
   "remote.SSH.loglevel": "trace",
   "remote.SSH.remotePlatform": {
     "dgx": "linux",
