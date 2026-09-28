@@ -129,7 +129,7 @@ Host wsl-desktop
 # WSL Ubuntu direct over Tailscale
 Host wsl-desktop-tailnet
   HostName jrsdesktop-1.tail64bbe0.ts.net
-  Port 22
+  Port 2222
   User jrs
 
 # WSL local on Windows host
