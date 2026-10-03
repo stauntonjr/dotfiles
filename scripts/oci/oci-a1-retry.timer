@@ -1,9 +1,9 @@
 [Unit]
-Description=Retry OCI A1 provisioning every 4 hours 27 minutes
+Description=Retry OCI A1 provisioning every 30 minutes
 
 [Timer]
-OnBootSec=4h27m
-OnUnitActiveSec=4h27m
+OnBootSec=30m
+OnUnitActiveSec=30m
 Persistent=true
 
 [Install]
